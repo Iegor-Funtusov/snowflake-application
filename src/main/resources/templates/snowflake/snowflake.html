@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Snowflake</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="card mb-2 mt-2">
+        <div class="card-header">
+            Snowflake
+        </div>
+        <div th:if="${uploaded}" class="card-body">
+            <form method="POST" enctype="multipart/form-data" th:action="@{/snowflake/{id}/runSnowflakeTerms(id=${id})}" th:object="${data}">
+                <div class="form-group">
+                    <label for="filename">File name</label>
+                    <input type="text" th:field="*{filename}" id="filename" placeholder="filename">
+                    <span th:if="${#fields.hasErrors('filename')}" th:errors="*{filename}"></span>
+                </div>
+                <div class="form-group">
+                    <label for="rows">Rows</label>
+                    <input type="number" th:field="*{rows}" id="rows" placeholder="rows">
+                    <span th:if="${#fields.hasErrors('rows')}" th:errors="*{rows}"></span>
+                </div>
+                <div class="form-group">
+                    <label for="tableName">tableName</label>
+                    <input type="text" th:field="*{tableName}" id="tableName" placeholder="tableName">
+                    <span th:if="${#fields.hasErrors('tableName')}" th:errors="*{tableName}"></span>
+                </div>
+                <button type="submit" class="btn btn-primary">Run</button>
+            </form>
+        </div>
+
+        <div th:unless="${uploaded}" class="card-body">
+            <form method="POST" enctype="multipart/form-data" th:action="@{/snowflake/{id}(id=${id})}">
+                <table>
+                    <tr><td>File to upload:</td><td><input type="file" name="file" /></td></tr>
+                    <tr><td></td><td><input type="submit" value="Upload" /></td></tr>
+                </table>
+            </form>
+        </div>
+
+        <div>
+            <ul>
+                <li th:each="file : ${files}">
+                    <a th:href="${file}" th:text="${file}" />
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>

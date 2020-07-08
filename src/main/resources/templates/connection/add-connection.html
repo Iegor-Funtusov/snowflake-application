@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>New</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="card mb-2 mt-2">
+        <div class="card-header">
+            Add new connection
+        </div>
+        <div class="card-body">
+            <form action="#" th:action="@{/connection/addNewConnection}" th:object="${connection}" method="post">
+                <div class="form-group">
+                    <label for="user">User</label>
+                    <input type="text" th:field="*{user}" id="user" placeholder="user">
+                    <span th:if="${#fields.hasErrors('user')}" th:errors="*{user}"></span>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="text" th:field="*{password}" id="password" placeholder="password">
+                    <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+                </div>
+                <div class="form-group">
+                    <label for="warehouse">Warehouse</label>
+                    <input type="text" th:field="*{warehouse}" id="warehouse" placeholder="warehouse">
+                    <span th:if="${#fields.hasErrors('warehouse')}" th:errors="*{warehouse}"></span>
+                </div>
+                <div class="form-group">
+                    <label for="db">DB</label>
+                    <input type="text" th:field="*{db}" id="db" placeholder="db">
+                    <span th:if="${#fields.hasErrors('db')}" th:errors="*{db}"></span>
+                </div>
+                <div class="form-group">
+                    <label for="schema">Schema</label>
+                    <input type="text" th:field="*{schema}" id="schema" placeholder="schema">
+                    <span th:if="${#fields.hasErrors('schema')}" th:errors="*{schema}"></span>
+                </div>
+                <div class="form-group">
+                    <label for="region">Region</label>
+                    <input type="text" th:field="*{region}" id="region" placeholder="region">
+                    <span th:if="${#fields.hasErrors('region')}" th:errors="*{region}"></span>
+                </div>
+                <button type="submit" class="btn btn-primary">Add</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

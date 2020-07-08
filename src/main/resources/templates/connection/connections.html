@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>All connections</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="card mb-2 mt-2">
+        <div class="card-header">
+            All Connections
+        </div>
+        <div class="card-body">
+            <table class="table table-sm table-hover">
+                <thead>
+                <tr>
+                    <th>user</th>
+                    <th>password</th>
+                    <th>warehouse</th>
+                    <th>db</th>
+                    <th>schema</th>
+                    <th>region</th>
+                    <th>edit</th>
+                    <th>connect</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="connection : ${connections}">
+                    <td th:text="${connection.getUser()}"></td>
+                    <td th:text="${connection.getPassword()}"></td>
+                    <td th:text="${connection.getWarehouse()}"></td>
+                    <td th:text="${connection.getDb()}"></td>
+                    <td th:text="${connection.getSchema()}"></td>
+                    <td th:text="${connection.getRegion()}"></td>
+                    <td><a th:href="@{/connection/edit/{id}(id=${connection.id})}">Edit</a></td>
+                    <td><a th:href="@{/snowflake/{id}(id=${connection.id})}">Connect</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card mb-2 mt-2">
+        <div class="card-header">
+            Create New DBConnection
+        </div>
+        <div class="card-body">
+            <a href="/connection/add" role="button" class="btn btn-primary">add</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
